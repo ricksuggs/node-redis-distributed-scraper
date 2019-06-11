@@ -33,6 +33,7 @@ The REST API is included in the Kue library, but one additional endpoint has bee
 
 - Request:
 
+        ```javascript
         request.post({
             uri: 'http://localhost:3000/job',
             body: {
@@ -44,42 +45,55 @@ The REST API is included in the Kue library, but one additional endpoint has bee
             },
             json: true
         });
+        ```
 
 - Response:
 
-        { id: ###, state: 'active' }
+        ```json
+        {
+            "id": 1,
+            "state": "active"
+        }
+        ```
 
 ##### Check a job's status:
 
 - Request:
 
+        ```javascript
         request.get({
             uri: 'http://localhost:3000/job/:id',
             json: true
         });
+        ```
 
 - Response:
 
-        { id: ###, state: 'active' }
+        ```json
+        {
+            "id": 1,
+            "state": "active"
+        }
+        ```
 
 ##### Fetch the job's result:
 
 - Request:
 
+        ```javascript
         request.get({
             uri: 'http://localhost:3000/job/:id/result',
             json: true
         });
+        ```
 
 - Response:
 
+        ```json
         {
-            responseBody: '<!doctype...>',
-            jobId: ###,
-            indexDate: '2019-06-11T03:32:53.711Z',
-            _id: 'DJ38F4jKtWuAFuim'
+            "responseBody": "<!doctype...>",
+            "jobId": 1,
+            "indexDate": "2019-06-11T03:32:53.711Z",
+            "_id": "DJ38F4jKtWuAFuim"
         }
-
-#### Known Issues
-
-1. The demo scripts don't exit on completion. Just use Ctrl+C to exit the process.
+        ```

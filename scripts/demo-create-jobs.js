@@ -64,12 +64,11 @@ function jobsCreated(jobs1) {
       jobs2.forEach(body => {
         rows.push([body.id, body.state]);
       });
-      //table.setData(rows);
-      //screen.render();
+      table.setData(rows);
+      screen.render();
       jobsActive = jobs2.some(body => {
         return body.state !== 'complete';
       });
-      console.log(jobsActive);
       if (!jobsActive) {
         clearInterval(intervalId);
       }
