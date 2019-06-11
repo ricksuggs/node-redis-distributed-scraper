@@ -1,0 +1,9 @@
+apps:
+  - script: src/master.js
+    watch: true
+    ignore_watch: "data/**"
+    instances: 1
+  - script: src/worker.js
+    watch: true
+    ignore_watch: "data/**"
+    instances: "max"
