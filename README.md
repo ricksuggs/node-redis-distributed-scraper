@@ -44,7 +44,7 @@ Flush the logs with the following command: `yarn flush`
 
 #### Job UI:
 
-Kue ships with a web dashboard to view jobs by status at `localhost:3000`
+Kue ships with a web dashboard to view jobs by status at http://localhost:3000
 
 #### API:
 
