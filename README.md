@@ -33,67 +33,67 @@ The REST API is included in the Kue library, but one additional endpoint has bee
 
 - Request:
 
-        ```javascript
-        request.post({
-            uri: 'http://localhost:3000/job',
-            body: {
-                type: 'url',
-                data: {
-                    title: `Url job: ${url}`,
-                    url
-                }
-            },
-            json: true
-        });
-        ```
+    ```javascript
+    request.post({
+        uri: 'http://localhost:3000/job',
+        body: {
+            type: 'url',
+            data: {
+                title: `Url job: ${url}`,
+                url
+            }
+        },
+        json: true
+    });
+    ```
 
 - Response:
 
-        ```json
-        {
-            "id": 1,
-            "state": "active"
-        }
-        ```
+    ```json
+    {
+        "id": 1,
+        "state": "active"
+    }
+    ```
 
 ##### Check a job's status:
 
 - Request:
 
-        ```javascript
-        request.get({
-            uri: 'http://localhost:3000/job/:id',
-            json: true
-        });
-        ```
+    ```javascript
+    request.get({
+        uri: 'http://localhost:3000/job/:id',
+        json: true
+    });
+    ```
 
 - Response:
 
-        ```json
-        {
-            "id": 1,
-            "state": "active"
-        }
-        ```
+    ```json
+    {
+        "id": 1,
+        "state": "active"
+    }
+    ```
 
 ##### Fetch the job's result:
 
 - Request:
 
-        ```javascript
-        request.get({
-            uri: 'http://localhost:3000/job/:id/result',
-            json: true
-        });
-        ```
+    ```javascript
+    request.get({
+        uri: 'http://localhost:3000/job/:id/result',
+        json: true
+    });
+    ```
 
 - Response:
 
-        ```json
-        {
-            "responseBody": "<!doctype...>",
-            "jobId": 1,
-            "indexDate": "2019-06-11T03:32:53.711Z",
-            "_id": "DJ38F4jKtWuAFuim"
-        }
-        ```
+    ```json
+    {
+        "responseBody": "<!doctype...>",
+        "jobId": 1,
+        "indexDate": "2019-06-11T03:32:53.711Z",
+        "_id": "DJ38F4jKtWuAFuim"
+    }
+    ```
