@@ -1,7 +1,7 @@
 const request = require('request-promise');
 
 request
-  .get('http://localhost:3000/jobs/complete/0..1/asc', { json: true })
+  .get('http://localhost:3000/jobs/complete/0..0/asc', { json: true })
   .then(jobs => {
     for (let job of jobs) {
       request

@@ -11,7 +11,7 @@ queue.on('error', function(err) {
 kue.app.get('/job/:id/result', (req, res) => {
   const id = parseInt(req.params.id);
   console.log('Fetching job result: ', id);
-  db.findOne({ jobId: 1463 }, (err, doc) => {
+  db.findOne({ jobId: id }, (err, doc) => {
     if (err) return res.json({ error: err.message });
     res.json(doc);
   });

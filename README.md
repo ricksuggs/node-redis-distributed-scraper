@@ -25,6 +25,7 @@ The job results can be fetched through a custom API endpoint, given that the job
 - redis-server
   - `sudo apt-get install redis-server`
   - `sudo service redis-server start`
+  - If you have docker installed: `docker-compose up -d`
 
 #### Scripts:
 
