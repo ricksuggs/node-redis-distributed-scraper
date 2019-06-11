@@ -29,7 +29,7 @@ This project is a proof of concept distributed task web scraper built with JavaS
 
 The REST API is included in the Kue library, but one additional endpoint has been added to fetch the job result from nedb
 
-Create a job:
+##### Create a job:
 
 - Request:
 
@@ -49,7 +49,7 @@ Create a job:
 
         { id: ###, state: 'active' }
 
-#### Check a job's status:
+##### Check a job's status:
 
 - Request:
 
@@ -62,7 +62,7 @@ Create a job:
 
         { id: ###, state: 'active' }
 
-#### Fetch the job's result:
+##### Fetch the job's result:
 
 - Request:
 
