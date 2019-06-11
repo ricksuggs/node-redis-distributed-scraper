@@ -7,7 +7,7 @@ const screen = blessed.screen({
   title: 'Task Queue Demo'
 });
 
-var table = blessed.table({
+var table = blessed.list({
   top: 'top',
   left: 'left',
   width: '50%',
@@ -22,7 +22,9 @@ var table = blessed.table({
       fg: '#f0f0f0'
     }
   },
-  data: [['jobId', 'state']]
+  data: [['jobId: state']],
+  scrollable: true,
+  mouse: true
 });
 
 screen.append(table);
@@ -49,7 +51,6 @@ Promise.all(
 function jobsCreated(jobs1) {
   let jobsActive = true;
   let intervalId = setInterval(() => {
-    const rows = [['jobId', 'state']];
     Promise.all(
       jobs1.map(job => {
         return request
@@ -61,10 +62,12 @@ function jobsCreated(jobs1) {
           });
       })
     ).then(jobs2 => {
-      jobs2.forEach(body => {
-        rows.push([body.id, body.state]);
+      jobs2.sort((a, b) => {
+        return a.id - b.id;
       });
-      table.setData(rows);
+      jobs2.forEach((body, i) => {
+        table.spliceItem(i, 1, `Job ${body.id}: ${body.state}`);
+      });
       screen.render();
       jobsActive = jobs2.some(body => {
         return body.state !== 'complete';
