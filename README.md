@@ -42,6 +42,10 @@ pm2 creates log files for each process in `~/.pm2/logs`
 
 Flush the logs with the following command: `yarn flush`
 
+#### Job UI:
+
+Kue ships with a web dashboard to view jobs by status at `localhost:3000`
+
 #### API:
 
 The REST API is included in the Kue library, but one additional endpoint has been added to fetch the job result from nedb
