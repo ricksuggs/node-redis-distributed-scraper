@@ -1,8 +1,9 @@
 const kue = require('kue');
-const Datastore = require('nedb');
+const sqlite3 = require('better-sqlite3');
 const request = require('request-promise');
 
-const db = new Datastore({ filename: 'data/web-scraper.db', autoload: true });
+const db = sqlite3('data/web-scraper.db');
+
 const queue = kue.createQueue();
 
 queue.process('url', (job, done) => {
@@ -12,15 +13,11 @@ queue.process('url', (job, done) => {
   request
     .get(`http://${job.data.url}`)
     .then(body => {
-      const doc = {
-        reponseBody: body,
-        jobId: job.id,
-        indexDate: new Date()
-      };
-      db.insert(doc, function(error, newDoc) {
-        console.log(`Document inserted with id: ${newDoc._id}`);
-        done();
-      });
+      const statement = db.prepare(
+        'INSERT INTO results (job_id, response_body) VALUES (?, ?)'
+      );
+      statement.run(job.id, body);
+      done();
     })
     .catch(error => {
       console.error('Error: ', error.message);

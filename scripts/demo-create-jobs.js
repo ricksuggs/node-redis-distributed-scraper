@@ -41,6 +41,9 @@ Promise.all(
         data: {
           title: `Url job: ${url}`,
           url
+        },
+        options: {
+          attempts: 5
         }
       },
       json: true
