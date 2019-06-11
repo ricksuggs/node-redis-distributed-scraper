@@ -35,6 +35,12 @@ The job results can be fetched through a custom API endpoint, given that the job
 - Fetch a sample result after all of the jobs are processed: `node ./scripts/demo-fetch-result.js`
 - Cleanup jobs: `node ./scripts/cleanup-jobs.js`
 
+#### Logging:
+
+pm2 creates log files for each process in `~/.pm2/logs`
+
+Flush the logs with the following command: `yarn flush`
+
 #### API:
 
 The REST API is included in the Kue library, but one additional endpoint has been added to fetch the job result from nedb
