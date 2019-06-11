@@ -6,7 +6,7 @@ This project was created with Ubuntu 16.04.6 LTS and NodeJS v10.15.3 and has not
 #### Technologies:
 
 - redis - queue backend
-- nedb - persistent storage for job results
+- sqlite3 - persistent storage for job results
 - kue - nodejs distributed queue library
 - pm2 - nodejs process manager, allows you to configure multiple worker processes
 
@@ -16,7 +16,9 @@ Kue is a redis backed distributed task queue. A master process is only needed to
 Multiple workers can be started concurrently. In this POC, `pm2` manages the processes.
 
 A url is processed by sending a `POST` request to the REST api (see example below). As the workers process
-the messages from the queue, each url is fetched and the response body is stored in the `nedb` database.
+the messages from the queue, each url is fetched and the response body is stored in the `sqlite3` database.
+
+The jobs in this POC are configured to **try 5 attempts** for success, otherwise end in a failure status.
 
 The job results can be fetched through a custom API endpoint, given that the job state is `complete`.
 
@@ -35,6 +37,9 @@ The job results can be fetched through a custom API endpoint, given that the job
   - (use Ctrl+C to exit this process after all jobs are complete)
 - Fetch a sample result after all of the jobs are processed: `node ./scripts/demo-fetch-result.js`
 - Cleanup jobs: `node ./scripts/cleanup-jobs.js`
+  - This uses the REST api to delete the jobs, it will attempt to delete 50 jobs
+    each time the script is run. You will need to run it multiple times to clean
+    up all of the jobs.
 - Shutdown all workers and master process: `yarn stop`
 
 #### Logging:
@@ -49,7 +54,7 @@ Kue ships with a web dashboard to view jobs by status at http://localhost:3000
 
 #### API:
 
-The REST API is included in the Kue library, but one additional endpoint has been added to fetch the job result from nedb
+The REST API is included in the Kue library, but one additional endpoint has been added to fetch the job result from sqlite3
 
 ##### Create a job:
 
