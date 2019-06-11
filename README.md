@@ -1,8 +1,7 @@
 ### Node Redis Distributed Scraper
 
+This project is a proof of concept distributed task web scraper built with JavaScript libraries.
 This project was created with Ubuntu 16.04.6 LTS and NodeJS v10.15.3 and has not been tested with any other versions.
-
-This project is a proof of concept distributed task web scraper built with JavaScript libraries
 
 #### Technologies:
 
@@ -10,6 +9,16 @@ This project is a proof of concept distributed task web scraper built with JavaS
 - nedb - persistent storage for job results
 - kue - nodejs distributed queue library
 - pm2 - nodejs process manager, allows you to configure multiple worker processes
+
+#### Architecture
+
+Kue is a redis backed distributed task queue. A master process is only needed to instantiate the REST api.
+Multiple workers can be started concurrently. In this POC, `pm2` manages the processes.
+
+A url is processed by sending a `POST` request to the REST api (see example below). As the workers process
+the messages from the queue, each url is fetched and the response body is stored in the `nedb` database.
+
+The job results can be fetched through a custom API endpoint, given that the job state is `complete`.
 
 #### Other Dependencies:
 
@@ -20,7 +29,7 @@ This project is a proof of concept distributed task web scraper built with JavaS
 #### Scripts:
 
 - Install JavaScript dependencies: `yarn install`
-- Start the master process, with 4 worker processes: `yarn start`
+- Start a master process as many worker processes as your machine's CPU: `yarn start`
 - Push some urls onto the queue as jobs: `node ./scripts/demo-create-jobs.js`
 - Fetch a sample result after all of the jobs are processed: `node ./scripts/demo-fetch-result.js`
 - Cleanup jobs: `node ./scripts/cleanup-jobs.js`
