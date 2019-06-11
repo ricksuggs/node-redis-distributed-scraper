@@ -31,8 +31,10 @@ The job results can be fetched through a custom API endpoint, given that the job
 
 #### Scripts:
 
+Run the following scripts in order, as a demo of the functionality.
+
 - Install JavaScript dependencies: `yarn install`
-- Start a master process and as many worker processes as your machine's CPUs: `yarn start`
+- Start a master process and as many worker processes as your machine's CPUs can handle: `yarn start`
 - Push 92 urls onto the queue as jobs: `node ./scripts/demo-create-jobs.js`
   - (use Ctrl+C to exit this process after all jobs are complete)
 - Fetch a sample result after all of the jobs are processed: `node ./scripts/demo-fetch-result.js`
